@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}PERCH official website{% endblock %}
+
+{% block description %}社会のニーズにマッチして喜んで使ってもらえる紙製品を提供する「PERCH」のウェブサイトです。{% endblock %}
+
+{% block styles %}
+<link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="first-view">
+  <div class="first-view-text">
+    <h1>わたしたちは、 <br>素材を「<i class="fas fa-heart" style="color: white;"> 👍いいね！」</i>のカタチに変える <br>Paper products
+      companyです。
+    </h1>
+    <p>紙はカタチを変えて、想いを満たしてくれる。</p>
+  </div>
+</div>
+<div class="lead">
+  <p>「幸せを感じる。」 <br>何気ない生活に、あるとうれしいそんなひととき。 <br>癒しと安らぎ、猫も満たされる空間。 <br>わたしたちは、創造していきます。</p>
+  <div class="link-button-area">
+    <a class="link-button" href="{{ url_for('concept') }}">CONCEPT</a>
+  </div>
+</div>
+<div class="recommended">
+  <h2>RECOMMENDED</h2>
+  <ul class="item-list">
+    <li>
+      <img src="{{ url_for('static', filename='images/index/img-item00.jpg') }}" alt="家具、アウトドア、DIYの画像">
+      <dl>
+        <dt>家具、アウトドア、DIY</dt>
+      </dl>
+    </li>
+    <li>
+      <img src="{{ url_for('static', filename='images/index/img-item01.jpg') }}" alt="猫の爪とぎの画像">
+      <dl>
+        <dt>猫の爪とぎ</dt>
+      </dl>
+    </li>
+    <li>
+      <img src="{{ url_for('static', filename='images/index/img-item02.jpg') }}" alt="猫ハウスの画像">
+      <dl>
+        <dt>猫ハウス</dt>
+      </dl>
+    </li>
+    <li>
+      <img src="{{ url_for('static', filename='images/index/img-item03.jpg') }}" alt="養生シートの画像">
+      <dl>
+        <dt>養生シート</dt>
+      </dl>
+    </li>
+    <li>
+      <img src="{{ url_for('static', filename='images/index/img-item04.jpg') }}" alt="ディスプレイの画像">
+      <dl>
+        <dt>什器</dt>
+      </dl>
+    </li>
+    <li>
+      <img src="{{ url_for('static', filename='images/index/img-item05.jpg') }}" alt="包装資材の画像">
+      <dl>
+        <dt>包装資材</dt>
+      </dl>
+    </li>
+    <li>
+      <img src="{{ url_for('static', filename='images/index/img-item06.jpg') }}" alt="災害時用品の画像">
+      <dl>
+        <dt>災害時用品</dt>
+      </dl>
+    </li>
+  </ul>
+  <div class="link-button-area">
+    <a class="link-button" href="{{ url_for('product') }}">PRODUCT</a>
+  </div>
+</div>
+{% endblock %}

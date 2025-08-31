@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}CONCEPT | PERCH official website{% endblock %}
+
+{% block description %}「PERCH」は、紙の可能性をペット用品、実用品をメインに生活空間に落とし込み、斬新さを提供します。{% endblock %}
+
+{% block styles %}
+<link href="{{ url_for('static', filename='css/concept.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="title">
+  <h1>CONCEPT</h1>
+  <p>私たちについて</p>
+</div>
+<div class="feature">
+  <div class="feature-text">
+    <h2>紙への追求</h2>
+    <p>
+      日本では、古来から伝統的な紙の技術が培われてきました。その技術は、世界でも稀有な存在です。特に「和紙」の耐久性は驚くほど高く、1000年以上も保存可能とされています。実際、奈良の正倉院には702年に作られた和紙の戸籍が現存しており、1300年以上の時を経てもなお読める状態で保たれています。そのような我が国の伝統が現代の製紙技術の発展にも活かされ、特に特殊紙や高機能紙の分野の技術革新はめざましいものがあります。以前には無理とされていた活用法も可能になっており、そういった紙の素材を使用することにより、さらに斬新なアイデアとデザインと実用性を加えた商品を開発し提供していきたいと考えています。
+    </p>
+    <p>
+      ハニカムボード、カラーダンボール（B段、E段、F段、G段）、ダンボール（強化ダンボールなど）、コートボール、チップボール、各種合紙、紙管素材、スチレンボード、PP素材など、用途に応じて各種素材を使い分けています。
+    </p>
+  </div>
+  <img src="{{ url_for('static', filename='images/concept/img-item01.jpg') }}" alt="ピックアップ商品の画像">
+</div>
+<div class="feature reverse">
+  <div class="feature-text">
+    <h2>デザインから製造まで自社一貫体制</h2>
+    <p>
+      弊社では、顧客ニーズに対応するため、デザイン提案からCAD設計、3Dシミュレーション、試作、生産まで自社で行うことにより、短納期・小ロット対応・柔軟な設計提案などにおいて、他社との差別化に努めて参りました。そうした対応力を強化するため、現在も人員の育成や最新マシンの導入を積極的に行い、弾力的な生産推進体制の構築に取組んでいます。段ボール製品関連については、自社でコルゲーターも保有することにより、段ボールシート製造からの一貫製造体制を行っております。また、最新のウォタージェットカッターも導入することにより、今まで困難であったカッティング技術や新素材への対応が出来るようになりました。今後ますます、新しいデザイン、新しい分野へ挑戦する機会が増えることになります。
+    </p>
+    <div class="tools-list">
+      <ul class="machine-list">
+        <h3>主要マシン</h3>
+        <li><a href="{{ url_for('machine') }}">コルゲーター</a></li>
+        <li><a href="{{ url_for('machine') }}">段ボール自動積層機</a></li>
+        <li><a href="{{ url_for('machine') }}">デジタルランニングソー</a></li>
+        <li><a href="{{ url_for('machine') }}">サンプルカッター</a></li>
+        <li><a href="{{ url_for('machine') }}">インクジェットプリンター</a></li>
+        <li><a href="{{ url_for('machine') }}">バンドソー</a></li>
+        <li><a href="{{ url_for('machine') }}">ウォタージェットカッター</a></li>
+      </ul>
+      <ul class="soft-list">
+        <h3>使用ソフトウェア</h3>
+        <li><a>artios CAD</a></li>
+        <li><a>ThinkDesign</a></li>
+        <li><a>Illustrator</a></li>
+        <li><a>Photoshop</a></li>
+        <li><a>....</a></li>
+      </ul>
+    </div>
+  </div>
+  <img src="{{ url_for('static', filename='images/concept/img-item02.jpg') }}" alt="製造マシンの画像">
+</div>
+<div class="feature">
+  <div class="feature-text">
+    <h2>変化への挑戦</h2>
+    <p>
+      時代の加速とともに、趣向も多様化し、商品のライフサイクルは現在ますます短くなっています。そんな時代の先を行くために、わたしたちは常に次を見据えた商品開発に取り組んでいます。現在、紙以外の素材へも挑戦し、紙との相性による相乗効果や、新素材単独による独自性を生み出すことを試みており、家具やアウトドア関連品、DIY関連品などの新分野への展開を始動しています。
+    </p>
+  </div>
+  <img src="{{ url_for('static', filename='images/concept/img-item03.jpg') }}" alt="ピックアップ新商品の画像">
+</div>
+<div class="link-button-area">
+  <a class="link-button" href="{{ url_for('machine') }}">MACHINE</a>
+</div>
+<div class="movie">
+  <h2>CONCEPT MOVIE</h2>
+  <iframe src="https://www.youtube.com/embed/uF3nr5-km3s?si=JMA30P5kGaaBGjyy" title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <p>ネコも喜び、みんな幸せ</p>
+</div>
+{% endblock %}
