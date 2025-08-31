@@ -85,7 +85,7 @@ jobs:
 
     - name: Upload artifact for deployment job
       id: artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: python-app
         path: deploy/
@@ -98,7 +98,7 @@ jobs:
     
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: python-app
 
@@ -109,7 +109,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v4
+      uses: azure/webapps-deploy@v3
       id: deploy-to-webapp
       with:
         app-name: 'hp'
@@ -158,4 +158,5 @@ jobs:
         echo "ℹ️ Note: The application may still be starting up."
         echo "ℹ️ Please wait a few more minutes and check the URL manually."
         exit 0
+
 
