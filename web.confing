@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <system.webServer>
+    <handlers>
+      <add name="PythonHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified"/>
+    </handlers>
+    <httpPlatform processPath="D:\home\Python311\python.exe"
+                  arguments="D:\home\site\wwwroot\startup.py"
+                  stdoutLogEnabled="true"
+                  stdoutLogFile="D:\home\LogFiles\python.log"
+                  startupTimeLimit="120"
+                  startupRetryCount="3">
+      <environmentVariables>
+        <environmentVariable name="FLASK_ENV" value="production" />
+        <environmentVariable name="PYTHONPATH" value="D:\home\site\wwwroot" />
+        <environmentVariable name="PYTHONUNBUFFERED" value="1" />
+      </environmentVariables>
+    </httpPlatform>
+    
+    <!-- 静的ファイルの設定 -->
+    <staticContent>
+      <mimeMap fileExtension=".css" mimeType="text/css" />
+      <mimeMap fileExtension=".js" mimeType="application/javascript" />
+      <mimeMap fileExtension=".json" mimeType="application/json" />
+    </staticContent>
+    
+    <!-- セキュリティ設定 -->
+    <security>
+      <requestFiltering>
+        <requestLimits maxAllowedContentLength="52428800" /> <!-- 50MB -->
+      </requestFiltering>
+    </security>
+    
+    <!-- URL書き換え（オプション） -->
+    <rewrite>
+      <rules>
+        <rule name="Configure Python" stopProcessing="true">
+          <match url="(.*)" />
+          <conditions>
+            <add input="{REQUEST_URI}" pattern="^/static/.*" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="/" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+</configuration>
