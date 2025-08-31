@@ -109,7 +109,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v3
+      uses: azure/webapps-deploy@v4
       id: deploy-to-webapp
       with:
         app-name: 'hp'
@@ -158,3 +158,4 @@ jobs:
         echo "ℹ️ Note: The application may still be starting up."
         echo "ℹ️ Please wait a few more minutes and check the URL manually."
         exit 0
+
