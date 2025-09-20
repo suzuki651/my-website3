@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% block title %}サーバーエラー{% endblock %}
-{% block content %}
-    <div style="text-align: center; padding: 50px;">
-        <h1>500 Internal Server Error</h1>
-        <p>サーバーでエラーが発生しました。お手数ですが、時間をおいて再度お試しください。</p>
-        <p><a href="{{ url_for('index') }}">ホームに戻る</a></p>
-    </div>
-{% endblock %}
