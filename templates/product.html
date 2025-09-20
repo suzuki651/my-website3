@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}PRODUCT | PERCH official website{% endblock %}
+
+{% block description %}PERCHが提供する様々な製品についてご紹介します。{% endblock %}
+
+{% block styles %}
+<link href="{{ url_for('static', filename='css/product.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="title">
+  <h1>PRODUCT</h1>
+  <p>製品</p>
+</div>
+<ul class="item-list">
+  <li>
+    <img src="{{ url_for('static', filename='images/index/img-item00.jpg') }}" alt="家具、アウトドア、DIYの画像" loading="lazy">
+    <dl>
+      <dt>家具、アウトドア、DIY</dt>
+      <dd>説明</dd>
+    </dl>
+  </li>
+  <li>
+    <img src="{{ url_for('static', filename='images/index/img-item01.jpg') }}" alt="猫の爪とぎの画像" loading="lazy">
+    <dl>
+      <dt>猫の爪とぎ</dt>
+      <dd>素材：段ボール<br>猫の爪とぎは、単なる「爪の手入れ」に留まらず、ストレス解消やストレッチの効用もあり、猫の本能や心身の健康に深く関わる重要な行動です。だからこそこの商品は猫にとってのマストアイテムです。ベースは積層段ボールや巻段ボール、形状はアーチ型・ベット型・キューブ型・ツリー型・桶型・スタンド型等々、据置タイプから壁掛けタイプまで、シンプルデザインからキャラクターデザインまで、幅広く提供しています。猫ちゃんの性格や設置場所に合わせて選んでください。お部屋にもマッチします。</dd>
+    </dl>
+  </li>
+  <li>
+    <img src="{{ url_for('static', filename='images/index/img-item02.jpg') }}" alt="猫ハウスの画像" loading="lazy">
+    <dl>
+      <dt>猫ハウス</dt>
+      <dd>素材：段ボール<br>猫にとって「安心できる居場所」としてとても役立つアイテムで、猫が喜ぶのは必至です。爪とぎ一体型や、手軽な組み立て式があります。組み合わせで幾通りの形が楽しめるモノもあり、猫は興味津々大満足です。</dd>
+    </dl>
+  </li>
+  <li>
+    <img src="{{ url_for('static', filename='images/index/img-item03.jpg') }}" alt="養生シートの画像" loading="lazy">
+    <dl>
+      <dt>養生シート</dt>
+      <dd>素材：紙と発泡シート<br>引越しや内装工事で床や壁を保護するために使われるシートです。クッション性があり滑りにくい素材を使用しています。プロの業者に限らず、ご家庭のDYIにもキズ防止のためのおススメの商品です。</dd>
+    </dl>
+  </li>
+  <li>
+    <img src="{{ url_for('static', filename='images/index/img-item04.jpg') }}" alt="ディスプレイの画像" loading="lazy">
+    <dl>
+      <dt>各種什器</dt>
+      <dd>素材：段ボール<br>陳列、接客、作業、展示の各種什器のご提案が可能です。人目を引き付ける魅力、業務への実用性、イメージ演出、購買意欲の刺激など、その場面に的確に貢献できる商品の提供を心掛けています。</dd>
+    </dl>
+  </li>
+  <li>
+    <img src="{{ url_for('static', filename='images/index/img-item05.jpg') }}" alt="包装資材の画像" loading="lazy">
+    <dl>
+      <dt>包装資材</dt>
+      <dd>モノの流通には「包む・保護する・運ぶ」のために必需品である包装資材。弊社は、段ボール箱・巻段ボール・段ボールパレットをメインに取り扱っています。</dd>
+    </dl>
+  </li>
+  <li>
+    <img src="{{ url_for('static', filename='images/index/img-item06.jpg') }}" alt="災害時用品の画像" loading="lazy">
+    <dl>
+      <dt>災害時用品</dt>
+      <dd>不測の事態の備えとして、身体と心の平穏のために提案させていただいています。</dd>
+    </dl>
+  </li>
+</ul>
+<div class="link-button-area">
+  <a class="link-button" href="{{ url_for('shop') }}">SHOP</a>
+</div>
+{% endblock %}
