@@ -140,7 +140,7 @@ def init_db() -> None:
                        (username, password_hash, email, security_question, security_answer_hash, created_at) 
                        VALUES (?, ?, ?, ?, ?, ?)''',
                     ('admin', 
-                     generate_password_hash('admin1q2w3e'),
+                     generate_password_hash('admin123'),
                      'suzuki651iris1@gmail.com',
                      'あなたの最初のペットの名前は？',
                      generate_password_hash('pet'),
@@ -657,4 +657,5 @@ if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))  # ローカル開発では5000番ポート
     
     logger.info(f"ローカル開発サーバー起動 - Debug: {debug_mode}, Port: {port}")
+
     app.run(debug=debug_mode, host='0.0.0.0', port=port)
