@@ -41,7 +41,7 @@ jobs:
           path: |
             .
             !venv/
-            !perch_database.db/
+            !perch_database.db
 
   deploy:
     runs-on: ubuntu-latest
@@ -71,3 +71,4 @@ jobs:
           slot-name: 'Production'
 
           
+
