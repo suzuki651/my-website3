@@ -61,24 +61,7 @@ jobs:
         slot-name: 'production'
         package: . # 現在のディレクトリ全体をアップロード
         
-    # 6. App Serviceの設定を更新（環境変数と起動コマンドの設定）
-    - name: Update App Service Configuration
-      uses: azure/cli@v2
-      with:
-        inlineScript: |
-          # アプリケーション設定（環境変数）をセット
-          az webapp config appsettings set --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.RESOURCE_GROUP }} --settings \
-            'FLASK_ENV=production' \
-            'WEBSITE_RUN_FROM_PACKAGE=0' \
-            'PORT=8000' \
-            'SECRET_KEY=${{ secrets.SECRET_KEY }}' \
-            'EMAIL_HOST=${{ secrets.EMAIL_HOST }}' \
-            'EMAIL_PORT=${{ secrets.EMAIL_PORT }}' \
-            'EMAIL_USER=${{ secrets.EMAIL_USER }}' \
-            'EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}' \
-            'EMAIL_FROM=${{ secrets.EMAIL_FROM }}'
-          
-    # 6. App Serviceの設定を更新（環境変数の設定のみ）
+    # 6. App Serviceの設定を更新（環境変数の設定）
     - name: Update App Service Configuration
       uses: azure/cli@v2
       with:
@@ -93,7 +76,12 @@ jobs:
             'EMAIL_PORT=${{ secrets.EMAIL_PORT }}' \
             'EMAIL_USER=${{ secrets.EMAIL_USER }}' \
             'EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}' \
-            'EMAIL_FROM=${{ secrets.EMAIL_FROM }}'
+            'EMAIL_FROM=${{ secrets.EMAIL_FROM }}' \
+            'DEFAULT_ADMIN_USERNAME=${{ secrets.DEFAULT_ADMIN_USERNAME }}' \
+            'DEFAULT_ADMIN_PASSWORD=${{ secrets.DEFAULT_ADMIN_PASSWORD }}' \
+            'DEFAULT_ADMIN_EMAIL=${{ secrets.DEFAULT_ADMIN_EMAIL }}' \
+            'DEFAULT_ADMIN_SECURITY_QUESTION=${{ secrets.DEFAULT_ADMIN_SECURITY_QUESTION }}' \
+            'DEFAULT_ADMIN_SECURITY_ANSWER=${{ secrets.DEFAULT_ADMIN_SECURITY_ANSWER }}'
           
           # 注意: web.configを使用するため、起動コマンドの設定は不要
           
