@@ -85,3 +85,6 @@ temp/
 # Local development files
 instance/
 .webassets-cache
+
+# Sensitive documentation (contains credentials)
+GITHUB_SECRETS_SETUP.md
