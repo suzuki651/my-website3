@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メール送信テスト</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .test-container {
+            max-width: 600px;
+            margin-top: 50px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .config-info {
+            background-color: #e7f3ff;
+            border-left: 4px solid #0d6efd;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .env-variable {
+            font-family: 'Courier New', monospace;
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="test-container">
+                    <h2 class="text-center mb-4">
+                        <i class="fas fa-envelope-open-text text-primary me-2"></i>
+                        メール送信テスト
+                    </h2>
+                    
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="alert-container mb-3">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% endwith %}
+                    
+                    <div class="config-info">
+                        <h6><i class="fas fa-cog me-2"></i>現在のメール設定確認</h6>
+                        <div class="alert alert-info">
+                            <strong>現在の設定値:</strong><br>
+                            EMAIL_HOST: {{ config.EMAIL_HOST }}<br>
+                            EMAIL_PORT: {{ config.EMAIL_PORT }}<br>
+                            EMAIL_USER: {{ config.EMAIL_USER }}<br>
+                            EMAIL_PASSWORD: {{ '*' * config.EMAIL_PASSWORD|length if config.EMAIL_PASSWORD else '設定されていません' }}<br>
+                            EMAIL_FROM: {{ config.EMAIL_FROM }}
+                        </div>
+                        <p class="mb-2">以下の環境変数が設定されているか確認してください：</p>
+                        <ul>
+                            <li><span class="env-variable">EMAIL_HOST</span> - SMTPサーバー</li>
+                            <li><span class="env-variable">EMAIL_PORT</span> - SMTPポート（通常587）</li>
+                            <li><span class="env-variable">EMAIL_USER</span> - 送信者メールアドレス</li>
+                            <li><span class="env-variable">EMAIL_PASSWORD</span> - アプリパスワード</li>
+                            <li><span class="env-variable">EMAIL_FROM</span> - From表示名</li>
+                        </ul>
+                    </div>
+                    
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="test_email" class="form-label">テストメール送信先</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="test_email" name="test_email" 
+                                       placeholder="test@example.com" required>
+                            </div>
+                            <div class="form-text">テストメールを送信するメールアドレスを入力してください</div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>テストメール送信
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Gmail使用時の設定例</h6>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>環境変数設定例：</strong></p>
+                            <pre class="bg-light p-3 rounded small"><code>export EMAIL_HOST="smtp.gmail.com"
+export EMAIL_PORT="587"
+export EMAIL_USER="your-gmail@gmail.com"
+export EMAIL_PASSWORD="your-16-digit-app-password"
+export EMAIL_FROM="your-gmail@gmail.com"</code></pre>
+                            
+                            <div class="alert alert-warning mt-3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>重要：</strong> Gmailを使用する場合は、2段階認証を有効にして「アプリパスワード」を生成する必要があります。
+                                通常のGmailパスワードは使用できません。
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>ダッシュボードに戻る
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

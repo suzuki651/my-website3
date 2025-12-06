@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}PERCH{% endblock %}</title>
+    <meta name="description" content="{% block description %}社会のニーズにマッチして喜んで使ってもらえる紙製品を提供する「PERCH」のウェブサイトです。{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#f4dd64">
+    
+    <!-- セキュリティ -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ self.description() }}{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:site_name" content="PERCH official website">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ self.title() }}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ self.description() }}{% endblock %}">
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='css/common.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}"></noscript>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    
+    {% block styles %}{% endblock %}
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "株式会社パーチ",
+        "url": "{{ request.url_root }}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "神戸町前田71番地",
+            "addressLocality": "安八郡",
+            "addressRegion": "岐阜県",
+            "postalCode": "503-2319",
+            "addressCountry": "JP"
+        },
+        "telephone": "+81-585-34-1856",
+        "foundingDate": "1996-04-03"
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+    
+    <header class="header" role="banner">
+        <div class="header-inner">
+            <a class="header-logo" href="{{ url_for('index') }}" aria-label="PERCHホームページへ">
+                <img src="{{ url_for('static', filename='images/common/logo-header.png') }}" alt="PERCH" width="110" height="auto">
+            </a>
+            <button class="toggle-menu-button" aria-expanded="false" aria-controls="header-site-menu" aria-label="メニューを開く"></button>
+            <div class="header-site-menu" id="header-site-menu" aria-hidden="true">
+                <nav class="site-menu" role="navigation" aria-label="メインナビゲーション">
+                    <ul>
+                        <li><a href="{{ url_for('about') }}">Profile/History</a></li>
+                        <li><a href="{{ url_for('concept') }}">CONCEPT</a></li>
+                        <li><a href="{{ url_for('product') }}">PRODUCT</a></li>
+                        <li><a href="{{ url_for('machine') }}">MACHINE</a></li>
+                        <li><a href="{{ url_for('shop') }}">SHOP</a></li>
+                        <li><a href="{{ url_for('access') }}">ACCESS</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main" id="main-content" role="main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes" role="alert" aria-live="polite">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer class="footer" role="contentinfo">
+        <nav class="site-menu" role="navigation" aria-label="フッターナビゲーション">
+            <ul>
+                <li><a href="{{ url_for('about') }}">Profile/History</a></li>
+                <li><a href="{{ url_for('concept') }}">CONCEPT</a></li>
+                <li><a href="{{ url_for('product') }}">PRODUCT</a></li>
+                <li><a href="{{ url_for('machine') }}">MACHINE</a></li>
+                <li><a href="{{ url_for('shop') }}">SHOP</a></li>
+                <li><a href="{{ url_for('access') }}">ACCESS</a></li>
+            </ul>
+        </nav>
+        <a class="footer-logo" href="{{ url_for('index') }}" aria-label="PERCHホームページへ">
+            <img src="{{ url_for('static', filename='images/common/logo-footer.png') }}" alt="PERCH" width="190" height="auto">
+        </a>
+        <p class="footer-company">株式会社パーチ</p>
+        <p class="footer-ceo">代表取締役社長　鈴木利子</p>
+        <p class="footer-office">OFFICE</p>
+        <p class="footer-office-adress">岐阜県揖斐郡大野町野2443-1</p>
+        <p class="footer-tel">
+            <a href="tel:+81585341856" aria-label="電話番号 0585-34-1856">TEL：0585-34-1856</a>
+        </p>
+        <div class="bace">
+            <p class="footer-adress">本　　社：岐阜県安八郡神戸町前田71</p>
+            <p class="footer-adress">大野工場：岐阜県揖斐郡大野町野2443-1</p>
+            <p class="footer-adress">神戸工場：岐阜県安八郡神戸町前田425</p>
+            <p class="footer-adress">滋賀工場：滋賀県長浜市三田町1367-109</p>
+        </div>
+        <p class="copyright"><small>&copy;Perch</small></p>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/toggle-menu.js') }}" defer></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

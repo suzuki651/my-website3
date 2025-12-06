@@ -1,0 +1,363 @@
+@charset "utf-8";
+
+/* リセット & ベーススタイル */
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.6;
+  background-color: #ffffff;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* スキップリンク */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* フラッシュメッセージ */
+.flashes {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 400px;
+}
+
+.flash-message {
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.flash-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.flash-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* ヘッダー */
+.header-inner {
+  max-width: 1200px;
+  height: 110px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-menu-button {
+  display: none;
+}
+
+.header-logo {
+  display: block;
+  width: 110px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.header-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.site-menu ul {
+  display: flex;
+}
+
+.site-menu ul li {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.site-menu ul li a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  display: block;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.site-menu ul li a:hover,
+.site-menu ul li a:focus {
+  background-color: #f4dd64;
+  outline: 2px solid #0d79fe;
+  outline-offset: 2px;
+}
+
+/* フッター */
+.footer {
+  color: #ffffff;
+  background-color: #24211b;
+  padding-top: 30px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-logo {
+  display: block;
+  width: 190px;
+  margin-top: 90px;
+}
+
+.footer-company {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.footer-ceo {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.footer-office {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.footer-office-adress {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.footer-tel {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 16px;
+}
+
+.footer-tel a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.footer-tel a:hover,
+.footer-tel a:focus {
+  color: #f4dd64;
+}
+
+.footer-adress {
+  font-size: 13px;
+  margin-top: 16px;
+}
+
+.copyright {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 90px;
+}
+
+/* フォーカス管理 */
+:focus {
+  outline: 2px solid #0d79fe;
+  outline-offset: 2px;
+}
+
+/* 高コントラストモード対応 */
+@media (prefers-contrast: high) {
+  .site-menu ul li a:hover {
+    background-color: #000;
+    color: #fff;
+  }
+}
+
+/* 動きを減らす設定への対応 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* タブレット・スマートフォン対応 */
+@media (max-width: 800px) {
+  .site-menu ul {
+    display: block;
+    text-align: center;
+  }
+
+  .site-menu li {
+    margin: 0;
+    margin-top: 20px;
+  }
+
+  .site-menu ul li a {
+    padding: 12px 20px;
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    height: 60px;
+    z-index: 100;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-inner {
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100%;
+    position: relative;
+  }
+
+  .header-logo {
+    width: 50px;
+    height: auto;
+  }
+
+  .header-logo img {
+    width: 100%;
+    height: auto;
+  }
+
+  .header-site-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    color: #ffffff;
+    background-color: #736E62;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    display: none;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .header-site-menu.menu-open {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .toggle-menu-button {
+    display: block;
+    width: 44px;
+    height: 44px;
+    background-image: url(../images/common/icon-menu.png);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .toggle-menu-button:hover,
+  .toggle-menu-button:focus {
+    background-color: #f0f0f0;
+  }
+
+  .toggle-menu-button.menu-active {
+    background-color: #736E62;
+  }
+
+  .main {
+    padding-top: 60px;
+  }
+
+  .flashes {
+    top: 70px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+
+  .footer-logo {
+    margin-top: 60px;
+  }
+
+  .footer-tel {
+    font-size: 20px;
+  }
+
+  .copyright {
+    margin-top: 50px;
+  }
+}
+
+/* 極小画面対応 */
+@media (max-width: 480px) {
+  .header-inner {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .site-menu ul li a {
+    padding: 15px 20px;
+    font-size: 18px;
+  }
+
+  .flash-message {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+}

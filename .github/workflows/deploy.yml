@@ -1,0 +1,104 @@
+# GitHub Actionsのワークフロー名
+name: Deploy Flask App to Azure App Service
+
+# ワークフローが実行されるトリガーを定義
+on:
+  push:
+    branches:
+      - main  # mainブランチへのプッシュで実行
+  pull_request:
+    branches:
+      - main  # mainブランチへのプルリクエストで実行
+
+# ワークフロー全体で共有する環境変数を定義
+env:
+  AZURE_WEBAPP_NAME: 'hp'    # 👈 ご自身のAzure App Service名を指定
+  PYTHON_VERSION: '3.11'                       # 👈 Pythonのバージョンを指定
+  RESOURCE_GROUP: 'ccc'   # 👈 Azureのリソースグループ名を指定
+
+# ジョブの定義
+jobs:
+  build_and_deploy:
+    # 実行環境
+    runs-on: ubuntu-latest
+    
+    # ジョブのステップ
+    steps:
+    # 1. リポジトリのコードをチェックアウト
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # 2. Python環境のセットアップ
+    - name: Set up Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: 'pip' # pipキャッシュを有効にしてビルドを高速化
+    
+    # 3. 依存関係のインストール
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  
+    
+    # 4. 依存関係の確認とテスト実行
+    - name: Verify dependencies and syntax
+      run: |
+        echo "📦 インストール済みパッケージの確認:"
+        pip list | grep -E "(Flask|gunicorn|Flask-WTF)"
+        echo "🔍 アプリケーションの構文チェック:"
+        python -c "import app; print('✅ アプリケーションの基本的な構文チェックが完了しました')"
+        echo "🔍 Gunicornの動作確認:"
+        python -c "import gunicorn; print('✅ Gunicorn が正常にインポートされました')"
+    
+    # 5. Azureへのデプロイ
+    - name: Deploy to Azure App Service
+      uses: azure/webapps-deploy@v2
+      with:
+        # GitHub Secretsに設定した発行プロファイルを使用
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        slot-name: 'production'
+        package: . # 現在のディレクトリ全体をアップロード
+        
+    # 6. App Serviceの設定を更新（環境変数と起動コマンドの設定）
+    - name: Update App Service Configuration
+      uses: azure/cli@v2
+      with:
+        inlineScript: |
+          # アプリケーション設定（環境変数）をセット
+          az webapp config appsettings set --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.RESOURCE_GROUP }} --settings \
+            'FLASK_ENV=production' \
+            'WEBSITE_RUN_FROM_PACKAGE=0' \
+            'PORT=8000' \
+            'SECRET_KEY=${{ secrets.SECRET_KEY }}' \
+            'EMAIL_HOST=${{ secrets.EMAIL_HOST }}' \
+            'EMAIL_PORT=${{ secrets.EMAIL_PORT }}' \
+            'EMAIL_USER=${{ secrets.EMAIL_USER }}' \
+            'EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}' \
+            'EMAIL_FROM=${{ secrets.EMAIL_FROM }}'
+          
+    # 6. App Serviceの設定を更新（環境変数の設定のみ）
+    - name: Update App Service Configuration
+      uses: azure/cli@v2
+      with:
+        inlineScript: |
+          # アプリケーション設定（環境変数）をセット
+          az webapp config appsettings set --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.RESOURCE_GROUP }} --settings \
+            'FLASK_ENV=production' \
+            'WEBSITE_RUN_FROM_PACKAGE=0' \
+            'PYTHONUNBUFFERED=1' \
+            'SECRET_KEY=${{ secrets.SECRET_KEY }}' \
+            'EMAIL_HOST=${{ secrets.EMAIL_HOST }}' \
+            'EMAIL_PORT=${{ secrets.EMAIL_PORT }}' \
+            'EMAIL_USER=${{ secrets.EMAIL_USER }}' \
+            'EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}' \
+            'EMAIL_FROM=${{ secrets.EMAIL_FROM }}'
+          
+          # 注意: web.configを使用するため、起動コマンドの設定は不要
+          
+    # 7. デプロイ成功の通知
+    - name: Notify on successful deployment
+      run: |
+        echo "✅ Successfully deployed ${{ env.AZURE_WEBAPP_NAME }} to Azure App Service."
+        echo "🌐 Application URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"

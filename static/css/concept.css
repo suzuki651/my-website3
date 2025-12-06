@@ -1,0 +1,279 @@
+@charset "utf-8";
+
+.title {
+  height: 310px;
+  background-image: url(../images/concept/bg-main12.jpg);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-shadow: 1px 1px 10px #4b2c14;
+}
+
+.title h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.title p {
+  font-size: 14px;
+  margin: 15px;
+}
+
+.feature {
+  display: flex;
+  justify-content: space-between;
+  width: 930px;
+  max-width: 90%;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: flex-start;
+}
+
+.feature img {
+  width: 360px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature-text {
+  max-width: 500px;
+  margin-right: 40px;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.reverse .feature-text {
+  margin-left: 40px;
+  margin-right: 0;
+}
+
+.feature-text h2 {
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.feature-text h2::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background-color: #000000;
+  margin-top: 20px;
+}
+
+.feature-text p {
+  font-size: 15px;
+  line-height: 28px;
+  margin-top: 25px;
+}
+
+.tools-list {
+  font-size: 13px;
+  line-height: 20px;
+  display: flex;
+  margin-top: 30px;
+  margin-left: 100px;
+  gap: 40px;
+}
+
+.tools-list h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.tools-list ul {
+  margin: 0;
+}
+
+.tools-list li {
+  margin-bottom: 5px;
+}
+
+.tools-list a {
+  color: #0d79fe;
+  text-decoration: underline;
+}
+
+.tools-list a:hover,
+.tools-list a:focus {
+  color: #0056b3;
+}
+
+.link-button-area {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.link-button {
+  background-color: #f4dd64;
+  display: inline-block;
+  min-width: 180px;
+  min-height: 48px;
+  line-height: 48px;
+  border-radius: 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.link-button:hover,
+.link-button:focus {
+  background-color: #0d79fe;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie {
+  width: 930px;
+  max-width: 90%;
+  background-color: #f8f8f8;
+  padding: 50px 60px;
+  margin-top: 55px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie h2 {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.movie h2::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background-color: #000000;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.movie iframe {
+  display: block;
+  width: 100%;
+  height: 456px;
+  margin-top: 30px;
+  border-radius: 8px;
+}
+
+.movie p {
+  font-size: 22px;
+  line-height: 1.5;
+  margin-top: 20px;
+  text-align: center;
+  font-style: italic;
+  color: #555;
+}
+
+.footer {
+  margin-top: 100px;
+}
+
+/* アクセシビリティ向上 */
+.feature-text h2:focus {
+  outline: 2px solid #0d79fe;
+  outline-offset: 4px;
+}
+
+/* タブレット・スマートフォン対応 */
+@media (max-width: 800px) {
+  .title {
+    background-image: url(../images/concept/bg-main13.jpg);
+    height: 250px;
+  }
+
+  .title h1 {
+    font-size: 28px;
+  }
+
+  .feature {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 45px;
+    padding: 0 20px;
+  }
+
+  .feature-text {
+    margin-right: 0;
+  }
+
+  .reverse .feature-text {
+    margin-left: 0;
+  }
+
+  .feature img {
+    width: 100%;
+    height: auto;
+    margin-top: 25px;
+  }
+
+  .tools-list {
+    margin-left: 0;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .movie {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px 25px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .movie iframe {
+    height: 240px;
+  }
+
+  .movie p {
+    font-size: 18px;
+  }
+
+  .link-button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* 極小画面対応 */
+@media (max-width: 480px) {
+  .title h1 {
+    font-size: 24px;
+    padding: 0 20px;
+  }
+
+  .feature-text p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .movie {
+    padding: 20px 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .movie iframe {
+    height: 200px;
+  }
+}
