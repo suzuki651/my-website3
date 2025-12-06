@@ -46,6 +46,7 @@ coverage.xml
 .venv
 env/
 venv/
+flask_env/
 ENV/
 env.bak/
 venv.bak/
@@ -58,6 +59,7 @@ perch_database.db
 # IDE
 .vscode/
 .idea/
+.claude/
 *.swp
 *.swo
 *~
@@ -88,3 +90,8 @@ instance/
 
 # Sensitive documentation (contains credentials)
 GITHUB_SECRETS_SETUP.md
+
+# Local guides and reports
+作業完了レポート.txt
+完了ガイド.md
+【重要】基本認証無効化への対応完了.md
