@@ -12,9 +12,9 @@ on:
 
 # ワークフロー全体で共有する環境変数を定義
 env:
-  AZURE_WEBAPP_NAME: 'hp'    # 👈 ご自身のAzure App Service名を指定
-  PYTHON_VERSION: '3.11'                       # 👈 Pythonのバージョンを指定
-  RESOURCE_GROUP: 'ccc'   # 👈 Azureのリソースグループ名を指定
+  AZURE_WEBAPP_NAME: 'hpsystem'    # Azure App Service名
+  PYTHON_VERSION: '3.11'
+  RESOURCE_GROUP: 'ccc'
 
 # ジョブの定義
 jobs:
