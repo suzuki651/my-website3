@@ -51,16 +51,12 @@ jobs:
         echo "🔍 Gunicornの動作確認:"
         python -c "import gunicorn; print('✅ Gunicorn が正常にインポートされました')"
     
-    # 5. Azureへのデプロイ
-    - name: Deploy to Azure App Service
-      uses: azure/webapps-deploy@v2
+    # 5. Azureにログイン（Service Principalを使用）
+    - name: Azure Login
+      uses: azure/login@v1
       with:
-        # GitHub Secretsに設定した発行プロファイルを使用
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        slot-name: 'production'
-        package: . # 現在のディレクトリ全体をアップロード
-        
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
     # 6. App Serviceの設定を更新（環境変数の設定）
     - name: Update App Service Configuration
       uses: azure/cli@v2
@@ -71,6 +67,7 @@ jobs:
             'FLASK_ENV=production' \
             'WEBSITE_RUN_FROM_PACKAGE=0' \
             'PYTHONUNBUFFERED=1' \
+            'SCM_DO_BUILD_DURING_DEPLOYMENT=true' \
             'SECRET_KEY=${{ secrets.SECRET_KEY }}' \
             'EMAIL_HOST=${{ secrets.EMAIL_HOST }}' \
             'EMAIL_PORT=${{ secrets.EMAIL_PORT }}' \
@@ -82,8 +79,16 @@ jobs:
             'DEFAULT_ADMIN_EMAIL=${{ secrets.DEFAULT_ADMIN_EMAIL }}' \
             'DEFAULT_ADMIN_SECURITY_QUESTION=${{ secrets.DEFAULT_ADMIN_SECURITY_QUESTION }}' \
             'DEFAULT_ADMIN_SECURITY_ANSWER=${{ secrets.DEFAULT_ADMIN_SECURITY_ANSWER }}'
-          
+
           # 注意: web.configを使用するため、起動コマンドの設定は不要
+
+    # 7. Azureへのデプロイ
+    - name: Deploy to Azure App Service
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        slot-name: 'production'
+        package: . # 現在のディレクトリ全体をアップロード
           
     # 7. デプロイ成功の通知
     - name: Notify on successful deployment
